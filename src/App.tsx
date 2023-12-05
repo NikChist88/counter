@@ -1,31 +1,54 @@
 import './App.css'
 import { FC, useState } from 'react'
 import { Counter } from './components/Counter'
-import { Button } from './components/Button'
+import { CounterSet } from './components/CounterSet'
 
 export const App: FC = () => {
-  const [counter, setCounter] = useState(0)
+  const [count, setCount] = useState<number>(0)
+  const [maxValue, setMaxValue] = useState<number>(0)
+  const [startValue, setStartValue] = useState<number>(0)
+
+  const increment = () => {
+    setCount(count + 1)
+  }
+
+  const maxValueHandler = (value: number) => {
+    setMaxValue(value)
+  }
+
+  const startValueHandler = (value: number) => {
+    setStartValue(value)
+  }
+
+  const setToLocalStorage = () => {
+    localStorage.setItem('maxValue', JSON.stringify(maxValue))
+    localStorage.setItem('startValue', JSON.stringify(startValue))
+    setCount(startValue)
+  }
+
+  const getFromLocalStorage = () => {
+    const value = localStorage.getItem('startValue')
+    if (value) {
+      setCount(JSON.parse(value))
+    }
+  }
 
   return (
     <div className="wrapper">
-      <Counter
-        className={`counter ${counter > 4 && 'counter-max'}`}
-        counter={counter}
+      <CounterSet
+        maxValue={maxValue}
+        startValue={startValue}
+        maxValueHandler={maxValueHandler}
+        startValueHandler={startValueHandler}
+        setToLocalStorage={setToLocalStorage}
       />
-      <div className="counter-btns">
-        <Button
-          className={'counter-btn'}
-          title={'inc'}
-          disabled={counter > 4}
-          onClick={() => setCounter((counter) => counter + 1)}
-        />
-        <Button
-          className={'counter-btn'}
-          title={'reset'}
-          disabled={counter === 0}
-          onClick={() => setCounter(0)}
-        />
-      </div>
+      <Counter
+        count={count}
+        maxValue={maxValue}
+        startValue={startValue}
+        increment={increment}
+        getFromLocalStorage={getFromLocalStorage}
+      />
     </div>
   )
 }
