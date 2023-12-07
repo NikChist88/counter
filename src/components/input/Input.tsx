@@ -1,5 +1,5 @@
 import '../input/Input.styles.css'
-import { ChangeEvent, FC, useState } from 'react'
+import { ChangeEvent, FC } from 'react'
 
 type InputPropsType = {
   value: number

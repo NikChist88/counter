@@ -18,7 +18,8 @@
 }
 
 .counter {
-  width: 250px;
+  color: #6be3f8;
+  width: 350px;
   height: 100px;
   border-radius: 5px;
   display: flex;
@@ -30,9 +31,13 @@
   background-color: #282a33;
   border: 2px solid #6be3f8;
   margin-bottom: 10px;
+
+  span {
+    font-size: 24px;
+  }
 }
 
-.counter-max {
+.error {
   color: red;
 }
 
@@ -49,7 +54,7 @@
 /* --------------------------------------------------------------------- */
 
 .counter-set {
-  width: 250px;
+  width: 300px;
   height: 200px;
   border: 2px solid #6be3f8;
   padding: 10px;
